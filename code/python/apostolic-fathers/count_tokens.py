@@ -11,7 +11,7 @@ morphgnt_dir = "c:/git/MorphGNT/sblgnt/"
 apostolic_fathers_dir = "c:/git/jtauber/apostolic-fathers/texts/"
 
 # output dir
-output_dir = "c:/git/RickBrannan/aposotlic-fathers/data/tsv/"
+output_dir = "c:/git/RickBrannan/apostolic-fathers/data/tsv/"
 
 book_word_counts = {}
 
@@ -43,7 +43,7 @@ for filename in os.listdir(apostolic_fathers_dir):
             book_word_counts[abbrev] = book_word_count
 
 # report book_word_counts
-with open("book_word_counts.txt", "w") as f:
+with open(output_dir + "book_word_counts.txt", "w") as f:
     for book in book_word_counts:
         print(book + "\t " + str(book_word_counts[book]))
         f.write(book + "\t " + str(book_word_counts[book]) + "\n")
