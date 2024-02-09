@@ -20,7 +20,7 @@ The output currently mimicks the record style of MorphGNT. If I haven't got the 
 
 You can find it here:
 
-* data: https://github.com/RickBrannan/apostolic-fathers/data/morph/
+* data: https://github.com/RickBrannan/apostolic-fathers/tree/main/data/morph/
 * code: https://github.com/RickBrannan/apostolic-fathers/tree/main/code/python/apostolic-fathers/af-morph.py
 
 Some stats:
