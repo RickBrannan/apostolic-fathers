@@ -7,7 +7,8 @@ This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 Inter
 ## Apostolic Fathers Greek Morphology
 
 Since there is no publicly available and openly licensed morphology of the writings of the Apostolic Fathers 
-(that I know of; please correct me if I'm wrong and supply me links), I figured it was time to start on a project.
+(that I know of [besides some stuff from OpenText](https://github.com/OpenText-org/non_NT_annotation); please 
+correct me if I'm wrong and supply me links), I figured it was time to start on a project.
 
 I'm starting with James Tauber and Seumas MacDonald's [Open Apostolic Fathers](https://github.com/jtauber/apostolic-fathers).
 This is an edition of Kirsopp Lake's edition of the Apostolic Fathers, and is serviceable for these purposes.
@@ -31,7 +32,7 @@ Some stats:
 * total Latin words: 1703
 * total unique missed words: 7907
 
-My next step will be to either use a trained model to knock off some lemmatization, or find more morph data for the untagged forms. 
+My next step will be to incorporate any morph I can find in the OpenText material (Didache and Diognetus). After that, I'll either use a trained model to knock off some lemmatization, or find more morph data for the untagged forms. 
 Or maybe both.
 
 This is _totally_ an in-my-spare-time and as-I-feel-inspiried kind of project. And I don't have a lot of spare time. No promises 
