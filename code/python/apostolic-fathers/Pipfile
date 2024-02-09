@@ -9,6 +9,7 @@ pandas = "*"
 lxml = "*"
 biblelib = "*"
 greek-normalisation = "*"
+regex = "*"
 
 [dev-packages]
 
