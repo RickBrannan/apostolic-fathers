@@ -3,7 +3,8 @@ import regex as re
 from dataclasses import dataclass
 from greek_normalisation.normalise import Normaliser, Norm
 from unicodedata import normalize
-
+import spacy
+from spacy.tokens import MorphAnalysis
 
 @dataclass
 class MorphUnit:
@@ -19,11 +20,17 @@ class MorphUnit:
 # MorphGNT SBLGNT
 morphgnt_dir = "c:/git/MorphGNT/sblgnt/"
 
+# OpenText.org
+opentext_dir = "c:/git/OpenText/non_NT_annotation/"
+
 # Apostolic Fathers
 apostolic_fathers_dir = "c:/git/jtauber/apostolic-fathers/texts/"
 
 # output dir
 output_dir = "c:/git/RickBrannan/apostolic-fathers/data/morph/"
+
+# nlp
+nlp = spacy.load("grc_proiel_sm")
 
 # first read in morphgnt words
 morph_units = {}
@@ -58,6 +65,13 @@ af_counts['untagged'] = 0
 af_counts['latin'] = 0
 missed_words = {}
 
+pos_map = {}
+pos_map['NOUN'] = 'N-'
+pos_map['VERB'] = 'V-'
+pos_map['ADJ'] = 'A-'
+pos_map['DET'] = 'RA'
+pos_map['ADV'] = 'D-'
+
 for af_filename in os.listdir(apostolic_fathers_dir):
     if af_filename.endswith(".txt"):
         print("Processing " + af_filename)
@@ -87,8 +101,19 @@ for af_filename in os.listdir(apostolic_fathers_dir):
                     verse = verse.zfill(3)
                     bcv = f"{book_num}{writing}{chapter}{verse}"
 
+                # run nlp on the line to get lemmatized word
+                # assuming tokens in doc line up with split on space
+                doc = nlp(re.sub(r'[.,;()\[\]··;’]', '', line))
+                if len(doc[1:]) != len(tokens[1:]):
+                    print(f"{bcv}: Token count mismatch: {len(doc[1:])} vs {len(tokens[1:])}")
+                    for token in doc[1:]:
+                        print(f"{token.text} {token.lemma_} {token.pos_} {token.tag_}")
+
+                n = 0
                 for token in tokens[1:]:
                     text = normalize("NFKC", token)
+                    n += 1
+                    nlp_token = doc[n]
                     # removing punctuation does too much (it removes crasis)
                     word = re.sub(r'[.,;()\[\]·]', '', text)
                     af_counts['total'] += 1
@@ -99,8 +124,13 @@ for af_filename in os.listdir(apostolic_fathers_dir):
                         af_morph_units.append(morph)
                         af_counts['tagged'] += 1
                     else:
-                        print(f"Word not found in MorphGNT: {word}")
-                        morph = MorphUnit(bcv, '??', '????????', text, word, normalise(word)[0], '????')
+                        lemma = normalize("NFKC", nlp_token.lemma_)
+                        if nlp_token.pos_ in pos_map:
+                            pos = pos_map[nlp_token.pos_]
+                        else:
+                            pos = '??'
+                        print(f"Word not found in MorphGNT: {word} (lemma: {lemma}, pos {pos} ({nlp_token.pos_}, morph {nlp_token.morph}))")
+                        morph = MorphUnit(bcv, pos, '????????', text, word, normalise(word)[0], lemma)
                         af_morph_units.append(morph)
                         af_counts['untagged'] += 1
                         if re.search(r"^[a-z]+$", morph.normalized, re.IGNORECASE):

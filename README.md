@@ -32,8 +32,11 @@ Some stats:
 * total Latin words: 1703
 * total unique missed words: 7907
 
-My next step will be to incorporate any morph I can find in the OpenText material (Didache and Diognetus). After that, I'll either use a trained model to knock off some lemmatization, or find more morph data for the untagged forms. 
-Or maybe both.
+My next step will be to incorporate any morph I can find in the OpenText material (Didache and Diognetus). Update: I looked at the data,
+and it only has morph and lemma for words that occur in the NT, so ... they took the same shortcut I did.
+
+That means I'll use a trained model to knock off some lemmatization and morph. Planning on using [this model from HuggingFace](https://huggingface.co/Jacobo/grc_proiel_trf), which
+I've dabbled with before for lemma generation. Hoping the morph stuff is decent as well. 
 
 This is _totally_ an in-my-spare-time and as-I-feel-inspiried kind of project. And I don't have a lot of spare time. No promises 
 about status and finishing, use at your own risk, etc.
