@@ -5,6 +5,8 @@ from greek_normalisation.normalise import Normaliser, Norm
 from unicodedata import normalize
 import spacy
 from spacy.tokens import MorphAnalysis
+from morph_maps import *
+
 
 @dataclass
 class MorphUnit:
@@ -72,6 +74,7 @@ pos_map['ADJ'] = 'A-'
 pos_map['DET'] = 'RA'
 pos_map['ADV'] = 'D-'
 
+
 for af_filename in os.listdir(apostolic_fathers_dir):
     if af_filename.endswith(".txt"):
         print("Processing " + af_filename)
@@ -120,6 +123,11 @@ for af_filename in os.listdir(apostolic_fathers_dir):
                     if word in word_data:
                         popular_key = lambda x: max(word_data[word], key=word_data[word].get)
                         (pos, parse_code, lemma) = popular_key(word).split('|')
+                        auto_morph = convert_morph(nlp_token.morph)
+                        if parse_code == auto_morph:
+                            print(f"Match: {word} {pos} {parse_code} {lemma}")
+                        else:
+                            print(f"Mismatch: {word} {pos} {parse_code} {lemma} vs {nlp_token.pos_} {auto_morph}")
                         morph = MorphUnit(bcv, pos, parse_code, text, word, normalise(word)[0], lemma)
                         af_morph_units.append(morph)
                         af_counts['tagged'] += 1
@@ -127,10 +135,13 @@ for af_filename in os.listdir(apostolic_fathers_dir):
                         lemma = normalize("NFKC", nlp_token.lemma_)
                         if nlp_token.pos_ in pos_map:
                             pos = pos_map[nlp_token.pos_]
+                            if re.search(r"^R", pos):
+                                pos = get_pronoun_type(pos, nlp_token.morph)
                         else:
                             pos = '??'
-                        print(f"Word not found in MorphGNT: {word} (lemma: {lemma}, pos {pos} ({nlp_token.pos_}, morph {nlp_token.morph}))")
-                        morph = MorphUnit(bcv, pos, '????????', text, word, normalise(word)[0], lemma)
+                        auto_morph = convert_morph(nlp_token.morph)
+                        print(f"Word not found in MorphGNT: {word} (lemma: {lemma}, pos {pos} ({nlp_token.pos_}, morph {morph}))")
+                        morph = MorphUnit(bcv, pos, auto_morph, text, word, normalise(word)[0], lemma)
                         af_morph_units.append(morph)
                         af_counts['untagged'] += 1
                         if re.search(r"^[a-z]+$", morph.normalized, re.IGNORECASE):
