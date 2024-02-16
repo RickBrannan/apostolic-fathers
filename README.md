@@ -30,7 +30,7 @@ I'm using [this model from HuggingFace](https://huggingface.co/Jacobo/grc_proiel
 I've dabbled with before for lemma generation. I'm going to initially use the lemma and morph capabilities,
 but it has some named entity recognition capabilities as well that I'd like to play around with.
 
-For Greek words unknown by Tauber's MorphGNT, I am now using the `grc_proiel_sm` form of the model to 
+For Greek words unknown by Tauber's MorphGNT, I am now using the `grc_proiel_lg` form of the model to 
 include lemmas and morph. These are untested and not reviewed. I've done some comparisons of words known
 by MorphGNT against the morph generated for them and found agreement, but it isn't perfect. Some known areas
 of trouble include:

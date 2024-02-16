@@ -32,7 +32,7 @@ apostolic_fathers_dir = "c:/git/jtauber/apostolic-fathers/texts/"
 output_dir = "c:/git/RickBrannan/apostolic-fathers/data/morph/"
 
 # nlp
-nlp = spacy.load("grc_proiel_sm")
+nlp = spacy.load("grc_proiel_lg")
 
 # first read in morphgnt words
 morph_units = {}
