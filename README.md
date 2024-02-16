@@ -24,23 +24,26 @@ You can find it here:
 * data: https://github.com/RickBrannan/apostolic-fathers/tree/main/data/morph/
 * code: https://github.com/RickBrannan/apostolic-fathers/tree/main/code/python/apostolic-fathers/af-morph.py
 
-Some stats:
+## Current Status
 
-* total AF words: 64949
-* total tagged words: 52676
-* total untagged words: 12273
-* total Latin words: 1703
-* total unique missed words: 7907
+I'm using [this model from HuggingFace](https://huggingface.co/Jacobo/grc_proiel_lg), which
+I've dabbled with before for lemma generation. I'm going to initially use the lemma and morph capabilities,
+but it has some named entity recognition capabilities as well that I'd like to play around with.
 
-My next step will be to incorporate any morph I can find in the OpenText material (Didache and Diognetus). (**Update:** 
-I looked at the OpenText data, and it only has morph and lemma for words that occur in the NT, so ... they took the same shortcut 
-I did. So I'm skipping it.
+For Greek words unknown by Tauber's MorphGNT, I am now using the `grc_proiel_sm` form of the model to 
+include lemmas and morph. These are untested and not reviewed. I've done some comparisons of words known
+by MorphGNT against the morph generated for them and found agreement, but it isn't perfect. Some known areas
+of trouble include:
 
-That means I'll use a trained model to knock off some lemmatization and morph. Planning on using 
-[this model from HuggingFace](https://huggingface.co/Jacobo/grc_proiel_trf), which
-I've dabbled with before for lemma generation. Hoping the morph stuff is decent as well. 
+* **Crasis.** The model splits a crasis like καγω into two tokens, whereas MorphGNT treats it as one. These are currently causing some problems.
+* **Morph mismatches.** The model doesn't emit morphology as traditionally thought of by most Koine/Hellenistic Greek Grammars. For example,
+the model has tense values of past, present, and future along with Aspect values of perfective and imperfective. I'm unsure how well this 
+data can be combined to map over to include as 'tense' stuff like aorist, perfect, imperfect, and pluperfect. But we'll see.
 
-This is _totally_ an in-my-spare-time and as-I-feel-inspiried kind of project. And I don't have a lot of spare time. No promises 
+All that said, there is data now available that has some sort of (unproven, untested, and wrong in spots) morphology for
+almost every available token.
+
+*Disclaimer:* This is _totally_ an in-my-spare-time and as-I-feel-inspiried kind of project. And I don't have a lot of spare time. No promises 
 about status and finishing, use at your own risk, etc.
 
 ### Columns

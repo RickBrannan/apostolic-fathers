@@ -12,7 +12,8 @@ greek-normalisation = "*"
 regex = "*"
 spacy = "*"
 grc-proiel-sm = {file = "https://huggingface.co/Jacobo/grc_proiel_sm/resolve/main/grc_proiel_sm-any-py3-none-any.whl"}
-grc-proiel-trf = {file = "https://huggingface.co/Jacobo/grc_proiel_trf/resolve/main/grc_proiel_trf-any-py3-none-any.whl"}
+grc-proiel-lg = {file = "https://huggingface.co/Jacobo/grc_proiel_lg/resolve/main/grc_proiel_lg-any-py3-none-any.whl"}
+# grc-proiel-trf = {file = "https://huggingface.co/Jacobo/grc_proiel_trf/resolve/main/grc_proiel_trf-any-py3-none-any.whl"}
 spacy-alignments = "*"
 nltk = "*"
 
