@@ -39,6 +39,9 @@ of trouble include:
 * **Morph mismatches.** The model doesn't emit morphology as traditionally thought of by most Koine/Hellenistic Greek Grammars. For example,
 the model has tense values of past, present, and future along with Aspect values of perfective and imperfective. I'm unsure how well this 
 data can be combined to map over to include as 'tense' stuff like aorist, perfect, imperfect, and pluperfect. But we'll see.
+* **Shepherd identifiers.** The identifiers for the Shepherd follow the Open Apostolic Fathers, which count the highest level from start to finish instead of
+starting over at each major section (Visions, Mandates, Similitudes), so there is no easy way to map to known citation systems. I'll correct this 
+sometime, it isn't important (yet) to getting the morph in.
 
 All that said, there is data now available that has some sort of (unproven, untested, and wrong in spots) morphology for
 almost every available token.
