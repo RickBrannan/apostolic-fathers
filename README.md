@@ -1,6 +1,8 @@
 # apostolic-fathers
 An effort at a freely-available, open-source edition of the Apostolic Fathers with morphology and lemmas.
 
+Initially focused on Greek, but I eventually want to get the Latin portions annotated as well.
+
 ## License
 This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
 
