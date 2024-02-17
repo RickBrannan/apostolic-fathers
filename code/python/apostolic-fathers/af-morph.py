@@ -102,6 +102,7 @@ for af_filename in os.listdir(apostolic_fathers_dir):
                     writing = writing.zfill(3)
                     chapter = chapter.zfill(3)
                     verse = verse.zfill(3)
+                    # this isn't correct, but good enough for now
                     bcv = f"{book_num}{writing}{chapter}{verse}"
 
                 # run nlp on the line to get lemmatized word

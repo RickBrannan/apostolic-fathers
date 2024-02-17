@@ -1,5 +1,5 @@
 # apostolic-fathers
-An effort at a freely-available, open-source edition of the Apostolic Fathers with morphology and lemmas.
+An effort at a freely-available, openly-licensed edition of the Apostolic Fathers with morphology and lemmas.
 
 Initially focused on Greek, but I eventually want to get the Latin portions annotated as well.
 
@@ -13,11 +13,12 @@ Since there is no publicly available and openly licensed morphology of the writi
 correct me if I'm wrong and supply me links), I figured it was time to start on a project.
 
 I'm starting with James Tauber and Seumas MacDonald's [Open Apostolic Fathers](https://github.com/jtauber/apostolic-fathers).
-This is an edition of Kirsopp Lake's edition of the Apostolic Fathers, and is serviceable for these purposes.
+This is an edition of Kirsopp Lake's edition of the Apostolic Fathers, and is serviceable for these purposes as it is
+licensed with a CC-BY-SA 4.0 license.
 
 In typical Rick fashion, I'm starting with the stupidest thing that might work, and that means mooching off of Tauber's other
-project, [MorphGNT](https://github.com/MorphGNT). Like it is so stupid. I'm just taking forms that happen in the Greek NT (SBLGNT) and 
-migrating the morph data over to the Apostolic Fathers based on (normalized) word matches.
+project, [MorphGNT](https://github.com/MorphGNT), also licensed CC-BY-SA 4.0. Like it is so stupid. I'm just taking forms that 
+happen in the Greek NT (SBLGNT) and migrating the morph data over to the Apostolic Fathers based on (normalized) word matches.
 
 The output currently mimicks the record style of MorphGNT. If I haven't got the value yet, I just insert `??` as appropriate.
 
