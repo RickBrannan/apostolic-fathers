@@ -32,6 +32,8 @@ You can find it here:
 
 ## Current Status
 
+### Greek
+
 For the Greek, I'm using [this model from HuggingFace](https://huggingface.co/Jacobo/grc_proiel_lg), which
 I've dabbled with before for lemma generation. I'm going to initially use the lemma and morph capabilities,
 but it has some named entity recognition capabilities as well that I'd like to play around with.
@@ -45,30 +47,31 @@ of trouble include:
 * **Morph mismatches.** The model doesn't emit morphology as traditionally thought of by most Koine/Hellenistic Greek Grammars. For example,
 the model has tense values of past, present, and future along with Aspect values of perfective and imperfective. I'm unsure how well this 
 data can be combined to map over to include as 'tense' stuff like aorist, perfect, imperfect, and pluperfect. But we'll see.
-* **Shepherd identifiers.** The identifiers for the Shepherd follow the Open Apostolic Fathers, which count the highest level from start to finish instead of
-starting over at each major section (Visions, Mandates, Similitudes), so there is no easy way to map to known citation systems. I'll correct this 
-sometime, it isn't important (yet) to getting the morph in.
 
 All that said, there is data now available that has some sort of (unproven, untested, and wrong in spots) morphology for
 almost every available Greek token.
 
 ### Latin
 
-For the Latin, I'm planning on using [Latincy's `la_core_web_lg` model](https://huggingface.co/latincy/la_core_web_lg). The 
+For the Latin, I'm using [Latincy's `la_core_web_lg` model](https://huggingface.co/latincy/la_core_web_lg). The 
 hope is to provide decent lemmas and morphology for the Latin portions found in the writings of the Apostolic Fathers.
+
+I have only initially experimented with this. Some known areas of trouble include:
+
+* **Latin POS and Morphology.** At present, values returned from the Latin model are mapped using the Greek POS and Greek morphology code.
+This is subpar and will be addressed at a later date, after the Greek POS and morphology stuff is a bit more stabilized.
+
 
 I'll document the morphology structure for Latin as it is developed, but I'm guessing it will look much like
 whatever `Latincy` spits out, only Tauberized.
 
-## Disclaimer
-*Disclaimer:* This is _totally_ an in-my-spare-time and as-I-feel-inspiried kind of project. And I don't have a lot of spare time. No promises 
-about status and finishing, use at your own risk, etc.
+## Codes and Fields
 
-### Columns
+### Columns (Greek and Latin)
 
  * book/chapter/verse
    * unlike MorphGNT, I use three digit fields as the Shepherd has over 100 chapters.
-   * unlike MorphGNT, the Shepherd has four values: book/writing/chapter/verse. However I plan to migrate them to Whittaker's chapter-verse structure.
+   * unlike MorphGNT, the Shepherd has five values: book/writing/section/chapter/verse. However, I do plan to migrate them to Whittaker's chapter-verse structure.
  * part of speech
  * parsing code
  * text (including punctuation)
@@ -77,7 +80,7 @@ about status and finishing, use at your own risk, etc.
  * lemma
  * language (`grc` or `lat`)
 
-### Part of Speech Code
+### Part of Speech Code (Greek and Latin)
 
 * A- adjective  
 * C- conjunction  
@@ -96,7 +99,7 @@ about status and finishing, use at your own risk, etc.
 * V- verb  
 * X- particle  
 
-### Parsing Code
+### Parsing Code (Greek)
 
  * person (1=1st, 2=2nd, 3=3rd)
  * tense (P=present, I=imperfect, F=future, A=aorist, X=perfect, Y=pluperfect)
@@ -107,3 +110,7 @@ about status and finishing, use at your own risk, etc.
  * gender (M=masculine, F=feminine, N=neuter)
  * degree (C=comparative, S=superlative)
  
+## Disclaimer
+*Disclaimer:* This is _totally_ an in-my-spare-time and as-I-feel-inspiried kind of project. And I don't have a lot of spare time. No promises 
+about status and finishing, use at your own risk, etc.
+
