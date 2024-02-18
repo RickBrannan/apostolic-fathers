@@ -17,6 +17,7 @@ class MorphUnit:
     word: str
     normalized: str
     lemma: str
+    lang: str
 
 
 # MorphGNT SBLGNT
@@ -49,7 +50,7 @@ for filename in os.listdir(morphgnt_dir):
                 line = line.strip()
                 cols = line.split(' ')
                 word = normalize('NFKC', cols[5])
-                morph = MorphUnit(cols[0], cols[1], cols[2], cols[3], normalize('NFKC', cols[4]), cols[5], cols[6])
+                morph = MorphUnit(cols[0], cols[1], cols[2], cols[3], normalize('NFKC', cols[4]), cols[5], cols[6], "grc")
                 morph_units[morph.bcv] = morph
                 if morph.word not in word_data:
                     word_data[morph.word] = {}
@@ -67,12 +68,12 @@ af_counts['untagged'] = 0
 af_counts['latin'] = 0
 missed_words = {}
 
-pos_map = {}
-pos_map['NOUN'] = 'N-'
-pos_map['VERB'] = 'V-'
-pos_map['ADJ'] = 'A-'
-pos_map['DET'] = 'RA'
-pos_map['ADV'] = 'D-'
+# pos_map = {}
+# pos_map['NOUN'] = 'N-'
+# pos_map['VERB'] = 'V-'
+# pos_map['ADJ'] = 'A-'
+# pos_map['DET'] = 'RA'
+# pos_map['ADV'] = 'D-'
 
 
 for af_filename in os.listdir(apostolic_fathers_dir):
@@ -108,6 +109,7 @@ for af_filename in os.listdir(apostolic_fathers_dir):
                 # run nlp on the line to get lemmatized word
                 # assuming tokens in doc line up with split on space
                 doc = nlp(re.sub(r'[.,;()\[\]··;’]', '', line))
+                # crasis messes stuff up. also, if it is Latin, it could be hosed as well
                 if len(doc[1:]) != len(tokens[1:]):
                     print(f"{bcv}: Token count mismatch: {len(doc[1:])} vs {len(tokens[1:])}")
                     for token in doc[1:]:
@@ -125,13 +127,15 @@ for af_filename in os.listdir(apostolic_fathers_dir):
                         popular_key = lambda x: max(word_data[word], key=word_data[word].get)
                         (pos, parse_code, lemma) = popular_key(word).split('|')
                         auto_morph = convert_morph(nlp_token.morph)
-                        if parse_code == auto_morph:
-                            print(f"Match: {word} {pos} {parse_code} {lemma}")
-                        else:
+                        if parse_code != auto_morph:
                             print(f"Mismatch: {word} {pos} {parse_code} {lemma} vs {nlp_token.pos_} {auto_morph}")
-                        morph = MorphUnit(bcv, pos, parse_code, text, word, normalise(word)[0], lemma)
+                        morph = MorphUnit(bcv, pos, parse_code, text, word, normalise(word)[0], lemma, "grc")
                         af_morph_units.append(morph)
                         af_counts['tagged'] += 1
+                    elif re.search(r"[a-z]", word, re.IGNORECASE):
+                        af_counts['latin'] += 1
+                        morph = MorphUnit(bcv, '??', '--------', text, word, normalise(word)[0], word, "lat")
+                        af_morph_units.append(morph)
                     else:
                         lemma = normalize("NFKC", nlp_token.lemma_)
                         if nlp_token.pos_ in pos_map:
@@ -140,20 +144,20 @@ for af_filename in os.listdir(apostolic_fathers_dir):
                                 pos = get_pronoun_type(pos, nlp_token.morph)
                         else:
                             pos = '??'
+                            print(f"Unknown pos: {nlp_token.pos_} (from: {bcv} {word})")
                         auto_morph = convert_morph(nlp_token.morph)
-                        print(f"Word not found in MorphGNT: {word} (lemma: {lemma}, pos {pos} ({nlp_token.pos_}, morph {morph}))")
-                        morph = MorphUnit(bcv, pos, auto_morph, text, word, normalise(word)[0], lemma)
+                        # print(f"Word not found in MorphGNT: {word} (lemma: {lemma}, pos {pos} ({nlp_token.pos_}, morph {morph}))")
+                        morph = MorphUnit(bcv, pos, auto_morph, text, word, normalise(word)[0], lemma, "grc")
                         af_morph_units.append(morph)
                         af_counts['untagged'] += 1
-                        if re.search(r"^[a-z]+$", morph.normalized, re.IGNORECASE):
-                            af_counts['latin'] += 1
                         if morph.normalized not in missed_words:
                             missed_words[morph.normalized] = 0
                         missed_words[morph.normalized] += 1
         # write out the morph units for this book
         with open(output_dir + af_filename, "w", encoding="utf8") as f:
             for morph in af_morph_units:
-                f.write(f"{morph.bcv} {morph.pos} {morph.parse_code} {morph.text} {morph.word} {morph.normalized} {morph.lemma}\n")
+                f.write(f"{morph.bcv} {morph.pos} {morph.parse_code} {morph.text} {morph.word} {morph.normalized} "
+                        f"{morph.lemma} {morph.lang}\n")
 
 # report missed words sorted by frequency
 for key in sorted(missed_words, key=missed_words.get, reverse=True):

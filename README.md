@@ -21,6 +21,9 @@ project, [MorphGNT](https://github.com/MorphGNT), also licensed CC-BY-SA 4.0. Li
 happen in the Greek NT (SBLGNT) and migrating the morph data over to the Apostolic Fathers based on (normalized) word matches.
 
 The output currently mimicks the record style of MorphGNT. If I haven't got the value yet, I just insert `??` as appropriate.
+Note that I've also added a column to the record. The language column, at the end, has valid values of either `grc` (Greek)
+or `lat` (Latin). As discussed below, I hope to run the Latin text through a model to lemmatize and analyze morphology at
+some point as well.
 
 You can find it here:
 
@@ -29,7 +32,7 @@ You can find it here:
 
 ## Current Status
 
-I'm using [this model from HuggingFace](https://huggingface.co/Jacobo/grc_proiel_lg), which
+For the Greek, I'm using [this model from HuggingFace](https://huggingface.co/Jacobo/grc_proiel_lg), which
 I've dabbled with before for lemma generation. I'm going to initially use the lemma and morph capabilities,
 but it has some named entity recognition capabilities as well that I'd like to play around with.
 
@@ -47,8 +50,17 @@ starting over at each major section (Visions, Mandates, Similitudes), so there i
 sometime, it isn't important (yet) to getting the morph in.
 
 All that said, there is data now available that has some sort of (unproven, untested, and wrong in spots) morphology for
-almost every available token.
+almost every available Greek token.
 
+### Latin
+
+For the Latin, I'm planning on using [Latincy's `la_core_web_lg` model](https://huggingface.co/latincy/la_core_web_lg). The 
+hope is to provide decent lemmas and morphology for the Latin portions found in the writings of the Apostolic Fathers.
+
+I'll document the morphology structure for Latin as it is developed, but I'm guessing it will look much like
+whatever `Latincy` spits out, only Tauberized.
+
+## Disclaimer
 *Disclaimer:* This is _totally_ an in-my-spare-time and as-I-feel-inspiried kind of project. And I don't have a lot of spare time. No promises 
 about status and finishing, use at your own risk, etc.
 
@@ -63,6 +75,7 @@ about status and finishing, use at your own risk, etc.
  * word (with punctuation stripped)
  * normalized word (using Tauber's `greek_normalisation` Python library
  * lemma
+ * language (`grc` or `lat`)
 
 ### Part of Speech Code
 
@@ -70,13 +83,16 @@ about status and finishing, use at your own risk, etc.
 * C- conjunction  
 * D- adverb  
 * I- interjection  
-* N- noun  
+* N- noun
+* NP noun, proper (not in Tauber)
+* NU number (not in Tauber)
 * P- preposition  
 * RA definite article  
 * RD demonstrative pronoun  
 * RI interrogative/indefinite pronoun  
 * RP personal pronoun  
 * RR relative pronoun  
+* TL transliterated (not in Tauber)
 * V- verb  
 * X- particle  
 

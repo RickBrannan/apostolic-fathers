@@ -62,7 +62,10 @@ gender_map = get_gender_map()
 pron_type_map = get_pron_type_map()
 degree_map = get_degree_map()
 
-pos_map = {'NOUN': 'N-', 'VERB': 'V-', 'ADJ': 'A-', 'DET': 'RA', 'ADV': 'D-', 'PRON': 'R-'}
+pos_map = {'NOUN': 'N-', 'VERB': 'V-', 'ADJ': 'A-', 'DET': 'RA', 'ADV': 'D-', 'PRON': 'R-', 'PROPN': 'NP',
+           'NUM': 'NU', 'CCONJ': 'C-', 'SCONJ': 'C-', 'PART': 'X-', 'INTJ': 'I-', 'X': 'TL', 'ADP': 'D-', 'AUX': 'V-'}
+           # AUX == verb like ειμι
+           # ADP == treat like adverb (adposition?)
 
 
 def get_pronoun_type(pos, morph):
@@ -90,7 +93,7 @@ def convert_morph(morph):
             (category, parse_code) = analysis.split('=')
             dct_analysis[category] = parse_code
         else:
-            print(f"Skipping '{analysis}' (from {morph})")
+            #print(f"Skipping '{analysis}' (from {morph})")
             return '--------'
 
     if "Person" in dct_analysis:
@@ -168,7 +171,7 @@ def convert_morph(morph):
         return_analysis.append("-")
 
     return_string = "".join(return_analysis)
-    print(f"Returning {return_string} (from {morph})")
+    # print(f"Returning {return_string} (from {morph})")
 
 
     return "".join(return_analysis)

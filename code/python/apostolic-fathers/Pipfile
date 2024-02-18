@@ -11,9 +11,12 @@ biblelib = "*"
 greek-normalisation = "*"
 regex = "*"
 spacy = "*"
+# greek models
 grc-proiel-sm = {file = "https://huggingface.co/Jacobo/grc_proiel_sm/resolve/main/grc_proiel_sm-any-py3-none-any.whl"}
 grc-proiel-lg = {file = "https://huggingface.co/Jacobo/grc_proiel_lg/resolve/main/grc_proiel_lg-any-py3-none-any.whl"}
-# grc-proiel-trf = {file = "https://huggingface.co/Jacobo/grc_proiel_trf/resolve/main/grc_proiel_trf-any-py3-none-any.whl"}
+# latin models
+# la-core-web-sm = {file = "https://huggingface.co/latincy/la_core_web_sm/resolve/main/la_core_web_sm-any-py3-none-any.whl"}
+# la-core-web-lg = {file = "https://huggingface.co/latincy/la_core_web_lg/resolve/main/la_core_web_lg-any-py3-none-any.whl"}
 spacy-alignments = "*"
 nltk = "*"
 
@@ -21,3 +24,4 @@ nltk = "*"
 
 [requires]
 python_version = "3.10"
+
