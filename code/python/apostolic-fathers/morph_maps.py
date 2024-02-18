@@ -77,13 +77,19 @@ def get_pronoun_type(pos, morph):
 
     if "PronType" in dct_analysis:
         if dct_analysis['PronType'] in pron_type_map:
-            return 'P' + pron_type_map[dct_analysis['PronType']]
+            return 'R' + pron_type_map[dct_analysis['PronType']]
         elif pos == "RA":
             return "RA"
         else:
-            return "P-"
+            return "R-"
     else:
-        return "P-"
+        return "R-"
+
+
+# for now, just shift latin through greek routines
+def convert_morph_lat(morph):
+    return convert_morph(morph)
+
 
 def convert_morph(morph):
     return_analysis = []
