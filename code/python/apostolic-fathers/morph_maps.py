@@ -10,11 +10,20 @@ def get_case_map():
     case_map = {'Gen': 'G', 'Nom': 'N', 'Acc': 'A', 'Dat': 'D', 'Voc': 'V'}
     return case_map
 
+def get_case_map_lat():
+    case_map_lat = get_case_map()
+    case_map_lat['Abl'] = 'B'
+    case_map_lat['Loc'] = 'L'
+    return case_map_lat
+
 def get_tense_map():
     # this is icky, but I can only really map Past to Aorist.
     tense_map = {'Past': 'A', 'Pres': 'P', 'Fut': 'F', 'Pqp': 'Y'}
     return tense_map
 
+def get_tense_map_lat():
+    tense_map = {'Past': 'X', 'Pres': 'P', 'Fut': 'F', 'Pqp': 'I'} # what the what is 'Pqp'?
+    return tense_map
 
 def get_aspect_map():
     aspect_map = {'Imp': 'I', 'Perf': 'A'}
@@ -50,7 +59,7 @@ def get_pron_type_map():
     pron_type_map = {'Prs': 'P', 'Rel': 'R', 'Int': 'I', 'Dem': 'D'}
     return pron_type_map
 
-
+# greek
 tense_map = get_tense_map()
 aspect_map = get_aspect_map()
 verb_form_map = get_verb_form_map()
@@ -61,6 +70,10 @@ case_map = get_case_map()
 gender_map = get_gender_map()
 pron_type_map = get_pron_type_map()
 degree_map = get_degree_map()
+
+# latin
+case_map_lat = get_case_map_lat()
+tense_map_lat = get_tense_map()
 
 pos_map = {'NOUN': 'N-', 'VERB': 'V-', 'ADJ': 'A-', 'DET': 'RA', 'ADV': 'D-', 'PRON': 'R-', 'PROPN': 'NP',
            'NUM': 'NU', 'CCONJ': 'C-', 'SCONJ': 'C-', 'PART': 'X-', 'INTJ': 'I-', 'X': 'TL', 'ADP': 'D-', 'AUX': 'V-'}

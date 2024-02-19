@@ -79,6 +79,7 @@ whatever `Latincy` spits out, only Tauberized.
  * normalized word (using Tauber's `greek_normalisation` Python library
  * lemma
  * language (`grc` or `lat`)
+ * source (`MorphGNT` or `grc_proiel_lg` or `la_core_web_sm`). This is source for both lemma and morphology string.
 
 ### Part of Speech Code (Greek and Latin)
 

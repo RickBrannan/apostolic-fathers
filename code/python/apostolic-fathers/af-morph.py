@@ -18,6 +18,7 @@ class MorphUnit:
     normalized: str
     lemma: str
     lang: str
+    source: str
 
 
 # MorphGNT SBLGNT
@@ -33,8 +34,10 @@ apostolic_fathers_dir = "c:/git/jtauber/apostolic-fathers/texts/"
 output_dir = "c:/git/RickBrannan/apostolic-fathers/data/morph/"
 
 # nlp
-nlp = spacy.load("grc_proiel_lg")
-nlp_lat = spacy.load("la_core_web_sm")
+greek_model = "grc_proiel_lg"
+latin_model = "la_core_web_sm"
+nlp = spacy.load(greek_model)
+nlp_lat = spacy.load(latin_model)
 
 # first read in morphgnt words
 morph_units = {}
@@ -51,7 +54,8 @@ for filename in os.listdir(morphgnt_dir):
                 line = line.strip()
                 cols = line.split(' ')
                 word = normalize('NFKC', cols[5])
-                morph = MorphUnit(cols[0], cols[1], cols[2], cols[3], normalize('NFKC', cols[4]), cols[5], cols[6], "grc")
+                morph = MorphUnit(cols[0], cols[1], cols[2], cols[3], normalize('NFKC', cols[4]), cols[5], cols[6],
+                                  "grc", "MorphGNT")
                 morph_units[morph.bcv] = morph
                 if morph.word not in word_data:
                     word_data[morph.word] = {}
@@ -148,7 +152,7 @@ for af_filename in os.listdir(apostolic_fathers_dir):
                         if parse_code != auto_morph:
                             if pos == "V-":
                                 print(f"Mismatch: {word} {pos} {parse_code} {lemma} vs {nlp_token.pos_} {auto_morph} {nlp_token.morph}")
-                        morph = MorphUnit(bcv, pos, parse_code, text, word, normalise(word)[0], lemma, "grc")
+                        morph = MorphUnit(bcv, pos, parse_code, text, word, normalise(word)[0], lemma, "grc", "MorphGNT")
                         af_morph_units.append(morph)
                         af_counts['tagged'] += 1
                     elif re.search(r"[a-z]", word, re.IGNORECASE):
@@ -164,7 +168,8 @@ for af_filename in os.listdir(apostolic_fathers_dir):
                             pos = '??'
                             print(f"Unknown LAT pos: {nlp_token_lat.pos_} (from: {bcv} {word})")
                         auto_morph = convert_morph_lat(nlp_token_lat.morph)
-                        morph = MorphUnit(bcv, pos, auto_morph, text, word, normalise(word)[0], lemma, "lat")
+                        morph = MorphUnit(bcv, pos, auto_morph, text, word, normalise(word)[0], lemma,
+                                          "lat", latin_model)
                         af_morph_units.append(morph)
                     else:
                         lemma = normalize("NFKC", nlp_token.lemma_)
@@ -180,7 +185,8 @@ for af_filename in os.listdir(apostolic_fathers_dir):
                             # n += 1 # bump the token
                         auto_morph = convert_morph(nlp_token.morph)
                         # print(f"Word not found in MorphGNT: {word} (lemma: {lemma}, pos {pos} ({nlp_token.pos_}, morph {morph}))")
-                        morph = MorphUnit(bcv, pos, auto_morph, text, word, normalise(word)[0], lemma, "grc")
+                        morph = MorphUnit(bcv, pos, auto_morph, text, word, normalise(word)[0], lemma,
+                                          "grc", greek_model)
                         af_morph_units.append(morph)
                         af_counts['untagged'] += 1
                         if morph.normalized not in missed_words:
@@ -190,7 +196,7 @@ for af_filename in os.listdir(apostolic_fathers_dir):
         with open(output_dir + af_filename, "w", encoding="utf8") as f:
             for morph in af_morph_units:
                 f.write(f"{morph.bcv} {morph.pos} {morph.parse_code} {morph.text} {morph.word} {morph.normalized} "
-                        f"{morph.lemma} {morph.lang}\n")
+                        f"{morph.lemma} {morph.lang} {morph.source}\n")
 
 # report missed words sorted by frequency
 # for key in sorted(missed_words, key=missed_words.get, reverse=True):
