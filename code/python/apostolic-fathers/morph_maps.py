@@ -12,17 +12,17 @@ def get_case_map():
 
 def get_tense_map():
     # this is icky, but I can only really map Past to Aorist.
-    tense_map = {'Past': 'A', 'Pres': 'P', 'Fut': 'F'}
+    tense_map = {'Past': 'A', 'Pres': 'P', 'Fut': 'F', 'Pqp': 'Y'}
     return tense_map
 
 
 def get_aspect_map():
-    aspect_map = {'Imp': 'I', 'Perf': 'X', 'Plup': 'Y'}
+    aspect_map = {'Imp': 'I', 'Perf': 'A'}
     return aspect_map
 
 
 def get_verb_form_map():
-    verb_form_map = {'Fin': 'F', 'Part': 'P', 'Inf': 'I'}
+    verb_form_map = {'Fin': 'F', 'Part': 'P', 'Inf': 'N'}
     return verb_form_map
 
 
@@ -107,6 +107,8 @@ def convert_morph(morph):
     else:
         return_analysis.append("-")
 
+    # perfective past == aorist
+    # imperfective past == imperfect?
     if "Aspect" in dct_analysis:
         if dct_analysis['Aspect'] in aspect_map:
             return_analysis.append(f"{aspect_map[dct_analysis['Aspect']]}")

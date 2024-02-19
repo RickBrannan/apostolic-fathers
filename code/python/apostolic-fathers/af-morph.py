@@ -145,8 +145,9 @@ for af_filename in os.listdir(apostolic_fathers_dir):
                         popular_key = lambda x: max(word_data[word], key=word_data[word].get)
                         (pos, parse_code, lemma) = popular_key(word).split('|')
                         auto_morph = convert_morph(nlp_token.morph)
-                        # if parse_code != auto_morph:
-                        #     print(f"Mismatch: {word} {pos} {parse_code} {lemma} vs {nlp_token.pos_} {auto_morph}")
+                        if parse_code != auto_morph:
+                            if pos == "V-":
+                                print(f"Mismatch: {word} {pos} {parse_code} {lemma} vs {nlp_token.pos_} {auto_morph} {nlp_token.morph}")
                         morph = MorphUnit(bcv, pos, parse_code, text, word, normalise(word)[0], lemma, "grc")
                         af_morph_units.append(morph)
                         af_counts['tagged'] += 1
