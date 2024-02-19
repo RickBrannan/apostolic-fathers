@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "08670d85eb416e0781bf202efd7060a739b65c9d76c5ac9233d462f40865a24f"
+            "sha256": "1d775e9c659d737df0998ae052b4a7dd4df6ce6bd760aa291c043004703e6934"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -300,6 +300,14 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==1.3.2"
+        },
+        "la-core-web-lg": {
+            "file": "https://huggingface.co/latincy/la_core_web_lg/resolve/main/la_core_web_lg-any-py3-none-any.whl",
+            "hashes": [
+                "sha256:5d6e6600651a69bdb4d73d042cc617bbc7c7da6dafb2aa25c387611a189b1b19"
+            ],
+            "index": "pypi",
+            "version": "==3.7.2"
         },
         "la-core-web-sm": {
             "file": "https://huggingface.co/latincy/la_core_web_sm/resolve/main/la_core_web_sm-any-py3-none-any.whl",
