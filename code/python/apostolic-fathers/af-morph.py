@@ -6,6 +6,7 @@ from unicodedata import normalize
 import spacy
 from spacy.tokens import MorphAnalysis
 from morph_maps import *
+import requests
 
 
 @dataclass
@@ -22,7 +23,15 @@ class MorphUnit:
 
 
 # MorphGNT SBLGNT
-morphgnt_dir = "c:/git/MorphGNT/sblgnt/"
+# retrieve directly from git to ensure we get the latest
+github_raw = 'https://raw.githubusercontent.com/MorphGNT/sblgnt/master/'
+morphgnt_files = ['61-Mt-morphgnt.txt', '62-Mk-morphgnt.txt', '63-Lk-morphgnt.txt', '64-Jn-morphgnt.txt',
+                  '65-Ac-morphgnt.txt', '66-Ro-morphgnt.txt', '67-1Co-morphgnt.txt', '68-2Co-morphgnt.txt',
+                  '69-Ga-morphgnt.txt', '70-Eph-morphgnt.txt', '71-Php-morphgnt.txt', '72-Col-morphgnt.txt',
+                  '73-1Th-morphgnt.txt', '74-2Th-morphgnt.txt', '75-1Ti-morphgnt.txt', '76-2Ti-morphgnt.txt',
+                  '77-Tit-morphgnt.txt', '78-Phm-morphgnt.txt', '79-Heb-morphgnt.txt', '80-Jas-morphgnt.txt',
+                  '81-1Pe-morphgnt.txt', '82-2Pe-morphgnt.txt', '83-1Jn-morphgnt.txt', '84-2Jn-morphgnt.txt',
+                  '85-3Jn-morphgnt.txt', '86-Jud-morphgnt.txt', '87-Re-morphgnt.txt']
 
 # OpenText.org
 opentext_dir = "c:/git/OpenText/non_NT_annotation/"
@@ -42,27 +51,27 @@ nlp_lat = spacy.load(latin_model)
 # first read in morphgnt words
 morph_units = {}
 word_data = {}
-for filename in os.listdir(morphgnt_dir):
-    if filename.endswith(".txt"):
-        print("Processing " + filename)
-        abbrev = re.sub(r'\.txt$', '', filename).split('-')[1]
-        # open the file as a list of lines
-        # since it is one line per word, this gives word count.
-        with open(morphgnt_dir + filename, encoding="utf8") as f:
-            lines = f.readlines()
-            for line in lines:
-                line = line.strip()
-                cols = line.split(' ')
-                word = normalize('NFKC', cols[5])
-                morph = MorphUnit(cols[0], cols[1], cols[2], cols[3], normalize('NFKC', cols[4]), cols[5], cols[6],
-                                  "grc", "MorphGNT")
-                morph_units[morph.bcv] = morph
-                if morph.word not in word_data:
-                    word_data[morph.word] = {}
-                key = f"{morph.pos}|{morph.parse_code}|{morph.lemma}"
-                if key not in word_data[morph.word]:
-                    word_data[morph.word][key] = 0
-                word_data[morph.word][key] += 1
+for filename in morphgnt_files:
+    print("Processing " + filename)
+    abbrev = re.sub(r'\.txt$', '', filename).split('-')[1]
+    # open the file as a list of lines
+    response = requests.get(github_raw + filename)
+    lines = response.text.split('\n')
+    for line in lines:
+        line = line.strip()
+        if line == "":
+            continue
+        cols = line.split(' ')
+        word = normalize('NFKC', cols[5])
+        morph = MorphUnit(cols[0], cols[1], cols[2], cols[3], normalize('NFKC', cols[4]), cols[5], cols[6],
+                          "grc", "MorphGNT")
+        morph_units[morph.bcv] = morph
+        if morph.word not in word_data:
+            word_data[morph.word] = {}
+        key = f"{morph.pos}|{morph.parse_code}|{morph.lemma}"
+        if key not in word_data[morph.word]:
+            word_data[morph.word][key] = 0
+        word_data[morph.word][key] += 1
 
 # ok, let's read us some AF and slap some very provisional data together.
 normalise = Normaliser().normalise

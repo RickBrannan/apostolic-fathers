@@ -2612,7 +2612,7 @@
 012007011 D- -------- οὕτω, οὕτω οὕτω οὕτω(ς) grc MorphGNT
 012007011 V- 3PAI-S-- φησίν, φησίν φησίν φημί grc MorphGNT
 012007011 RA ----NPM- οἱ οἱ οἱ ὁ grc MorphGNT
-012007011 V- -PAPNPM- θέλοντές θέλοντές θέλοντες θέλω grc MorphGNT
+012007011 V- -PAPNPM- θέλοντές θέλοντές θέλοντες θέλω grc grc_proiel_lg
 012007011 RP ----AS-- με με με ἐγώ grc MorphGNT
 012007011 V- -AAN---- ἰδεῖν ἰδεῖν ἰδεῖν ὁράω grc MorphGNT
 012007011 C- -------- καὶ καὶ καί καί grc MorphGNT
