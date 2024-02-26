@@ -114,6 +114,6 @@ whatever `Latincy` spits out, only Tauberized.
  * degree (C=comparative, S=superlative)
  
 ## Disclaimer
-*Disclaimer:* This is _totally_ an in-my-spare-time and as-I-feel-inspiried kind of project. And I don't have a lot of spare time. No promises 
+*Disclaimer:* This is _totally_ an in-my-spare-time and as-I-feel-inspired kind of project. And I don't have a lot of spare time. No promises 
 about status and finishing, use at your own risk, etc.
 
