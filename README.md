@@ -108,7 +108,7 @@ whatever `Latincy` spits out, only Tauberized.
  * tense (P=present, I=imperfect, F=future, A=aorist, X=perfect, Y=pluperfect)
  * voice (A=active, M=middle, P=passive)
  * mood (I=indicative, D=imperative, S=subjunctive, O=optative, N=infinitive, P=participle)
- * case (N=nominative, G=genitive, D=dative, A=accusative)
+ * case (N=nominative, G=genitive, D=dative, A=accusative, V=vocative)
  * number (S=singular, P=plural)
  * gender (M=masculine, F=feminine, N=neuter)
  * degree (C=comparative, S=superlative)
