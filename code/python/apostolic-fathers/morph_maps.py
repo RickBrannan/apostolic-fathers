@@ -1,5 +1,23 @@
 
 
+def get_af_files():
+    af_files = ['001-i_clement.txt', '002-ii_clement.txt', '003-ignatius-ephesians.txt', '004-ignatius-magnesians.txt',
+                '005-ignatius-trallians.txt', '006-ignatius-romans.txt', '007-ignatius-philadelphians.txt',
+                '008-ignatius-smyrnaeans.txt', '009-ignatius-polycarp.txt', '010-polycarp-philippians.txt',
+                '011-didache.txt', '012-barnabas.txt', '013-shepherd.txt', '014-martyrdom.txt', '015-diognetus.txt']
+
+    return af_files
+
+
+def get_morphgnt_files():
+    morphgnt_files = ['61-Mt-morphgnt.txt', '62-Mk-morphgnt.txt', '63-Lk-morphgnt.txt', '64-Jn-morphgnt.txt',
+                      '65-Ac-morphgnt.txt', '66-Ro-morphgnt.txt', '67-1Co-morphgnt.txt', '68-2Co-morphgnt.txt',
+                      '69-Ga-morphgnt.txt', '70-Eph-morphgnt.txt', '71-Php-morphgnt.txt', '72-Col-morphgnt.txt',
+                      '73-1Th-morphgnt.txt', '74-2Th-morphgnt.txt', '75-1Ti-morphgnt.txt', '76-2Ti-morphgnt.txt',
+                      '77-Tit-morphgnt.txt', '78-Phm-morphgnt.txt', '79-Heb-morphgnt.txt', '80-Jas-morphgnt.txt',
+                      '81-1Pe-morphgnt.txt', '82-2Pe-morphgnt.txt', '83-1Jn-morphgnt.txt', '84-2Jn-morphgnt.txt',
+                      '85-3Jn-morphgnt.txt', '86-Jud-morphgnt.txt', '87-Re-morphgnt.txt']
+    return morphgnt_files
 
 def get_degree_map():
     # Tauber's degree doesn't support 'Positive' so mapping to '-'
