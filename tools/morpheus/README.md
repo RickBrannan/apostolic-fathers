@@ -34,6 +34,10 @@ reference  POS  parsing  text  word  normalized  lemma  language  source
 The `source` column is `morpheus`. Latin portions of the corpus are omitted (only
 Greek is analyzed).
 
+`data/onomasticon-af.tsv` lists every proper name in the corpus (`lemma`, `form`,
+`count`, `source`), extracted from the `NP`-tagged tokens — the onomasticon that
+drove the biblical stemlib additions.
+
 ## Reproduce
 
 ```bash
