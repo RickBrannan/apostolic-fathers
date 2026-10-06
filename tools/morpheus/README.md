@@ -53,11 +53,13 @@ the existing lemma; "coverage" = the gold lemma is among Morpheus's candidates):
 
 | subset | tokens | coverage | top-1 lemma (Morpheus order → ranked) |
 | --- | ---: | ---: | ---: |
-| all Greek | 63,222 | 90.9% | 84.5% → 89.9% |
-| `source=MorphGNT` | 52,094 | 96.4% | 89.7% → 95.7% |
-| `source=grc_proiel_lg` | 11,128 | 65.4% | 60.5% → 62.9% |
+| all Greek | 63,222 | 91.0% | 84.6% → 90.0% |
+| `source=MorphGNT` | 52,094 | 96.4% | 89.7% → 95.8% |
+| `source=grc_proiel_lg` | 11,128 | 65.4% | 60.5% → 62.8% |
 
-With the proper-name fallback every Greek token receives an analysis (100%).
+Every Greek token receives an analysis (100%). Morpheus's coverage of the SBLGNT
+itself is 95.0% (top-1 lemma 94.3%) after the biblical proper-name stemlib added
+for this work.
 
 ## License / provenance
 

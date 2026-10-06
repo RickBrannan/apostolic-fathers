@@ -536,7 +536,7 @@
 006005003 N- ----ASF- συγγνώμην συγγνώμην συγγνώμην συγγνώμη grc morpheus
 006005003 RP 1---DSM- μοι μοι μοι ἐγώ grc morpheus
 006005003 V- 2PA--P-- ἔχετε· ἔχετε ἔχετε ἔχω grc morpheus
-006005003 RI ----NSN- τί τί τί τίς grc morpheus
+006005003 N- ----NSN- τί τί τί τίς grc morpheus
 006005003 RP 1---DSM- μοι μοι μοι ἐγώ grc morpheus
 006005003 V- 2PMI-S-- συμφέρει, συμφέρει συμφέρει συμφέρω grc morpheus
 006005003 RP 1---NSM- ἐγὼ ἐγὼ ἐγώ ἐγώ grc morpheus

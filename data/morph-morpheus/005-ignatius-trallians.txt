@@ -681,9 +681,9 @@
 005010001 RA ----NSN- τὸ τὸ τό ὁ grc morpheus
 005010001 V- -PAN---- δοκεῖν, δοκεῖν δοκεῖν δοκέω grc morpheus
 005010001 RP 1---NSM- ἐγὼ ἐγὼ ἐγώ ἐγώ grc morpheus
-005010001 RI ----NSN- τί τί τί τίς grc morpheus
+005010001 N- ----NSN- τί τί τί τίς grc morpheus
 005010001 V- 1XMI-S-- δέδεμαι, δέδεμαι δέδεμαι δέω grc morpheus
-005010001 RI ----NSN- τί τί τί τίς grc morpheus
+005010001 N- ----NSN- τί τί τί τίς grc morpheus
 005010001 X- -------- δὲ δὲ δέ δέ grc morpheus
 005010001 C- -------- καὶ καὶ καί καί grc morpheus
 005010001 V- 1PMI-S-- εὔχομαι εὔχομαι εὔχομαι εὔχομαι grc morpheus

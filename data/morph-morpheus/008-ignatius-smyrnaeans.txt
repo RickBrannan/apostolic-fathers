@@ -330,7 +330,7 @@
 008004002 RA ----NSN- τὸ τὸ τό ὁ grc morpheus
 008004002 V- -PAN---- δοκεῖν δοκεῖν δοκεῖν δοκέω grc morpheus
 008004002 V- 1XMI-S-- δέδεμαι. δέδεμαι δέδεμαι δέω grc morpheus
-008004002 RI ----NSN- τί τί τί τίς grc morpheus
+008004002 N- ----NSN- τί τί τί τίς grc morpheus
 008004002 X- -------- δὲ δὲ δέ δέ grc morpheus
 008004002 C- -------- καὶ καὶ καί καί grc morpheus
 008004002 A- ----ASM- ἑαυτὸν ἑαυτὸν ἑαυτόν ἑαυτοῦ grc morpheus
@@ -417,7 +417,7 @@
 008005002 RA ----NSN- τὸ τὸ τό ὁ grc morpheus
 008005002 A- ----NSN- αὐτὸ αὐτὸ αὐτό αὐτός grc morpheus
 008005002 V- -PAPDPM- φρονοῦσιν. φρονοῦσιν φρονοῦσιν φρονέω grc morpheus
-008005002 RI ----NSN- τί τί τί τίς grc morpheus
+008005002 N- ----NSN- τί τί τί τίς grc morpheus
 008005002 X- -------- γάρ γάρ γάρ γάρ grc morpheus
 008005002 RP 1---ASM- με με με ἐγώ grc morpheus
 008005002 V- 2PMI-S-- ὠφελεῖ ὠφελεῖ ὠφελεῖ ὠφελέω grc morpheus
